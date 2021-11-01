@@ -26,6 +26,8 @@ public class Remittance extends Transaction {
     // ISO-4217 Currency Code
     private String currencyCode;
 
+    private String merchantCountry;
+
     private Remittance() {
         this.transactionType = TransactionType.REMITTANCE;
     }
@@ -55,6 +57,8 @@ public class Remittance extends Transaction {
     public String getCurrencyCode() { return currencyCode; }
 
     public String getStatusMessage() { return statusMessage; }
+
+    public String getMerchantCountry() { return merchantCountry; }
 
     @Override
     public void setStatusMessage(String statusMessage) { this.statusMessage = statusMessage; }
@@ -98,6 +102,7 @@ public class Remittance extends Transaction {
         private BigDecimal amount;
         private String currency;
         private LocalDate date;
+        private String merchantCountry;
 
         private RemittanceBuilder() {}
 
@@ -151,6 +156,11 @@ public class Remittance extends Transaction {
             return this;
         }
 
+        public RemittanceBuilder withMerchantCountry(String merchantCountry) {
+            this.merchantCountry = merchantCountry;
+            return this;
+        }
+
         public Remittance build() {
             var remittance = new Remittance();
             remittance.transactionId = id;
@@ -163,6 +173,7 @@ public class Remittance extends Transaction {
             remittance.transactionAmount = amount;
             remittance.currencyCode = currency;
             remittance.transactionDate = date;
+            remittance.merchantCountry = merchantCountry;
             return remittance;
         }
     }

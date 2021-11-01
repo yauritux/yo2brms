@@ -43,12 +43,32 @@ public class RemittanceBusinessRuleTest {
         Remittance remittance = Remittance.newBuilder()
                 .withId(UUID.randomUUID().toString())
                 .withAmount(BigDecimal.valueOf(100))
+                .withCurrency("USD")
                 .withCustomerId("555")
                 .withCustomerName("Naruto")
                 .withOrigin("IR")
                 .withBeneficiaryId("123")
                 .withBeneficiaryName("Yauri")
                 .withBeneficiaryCountry("ID")
+                .build();
+        drools.insertAndFire(remittance);
+        drools.assertExist(remittance);
+        assertEquals(TransactionStatus.REJECTED, remittance.getTransactionStatus());
+    }
+
+    @Test
+    public void shouldNotSurpassQatarMaximumAmount() {
+        Remittance remittance = Remittance.newBuilder()
+                .withId(UUID.randomUUID().toString())
+                .withAmount(BigDecimal.valueOf(3000))
+                .withCurrency("QAR")
+                .withCustomerId("999")
+                .withCustomerName("Yauri Attamimi")
+                .withOrigin("ID")
+                .withBeneficiaryId("111")
+                .withBeneficiaryName("Khabib")
+                .withBeneficiaryCountry("RU")
+                .withMerchantCountry("Qatar")
                 .build();
         drools.insertAndFire(remittance);
         drools.assertExist(remittance);

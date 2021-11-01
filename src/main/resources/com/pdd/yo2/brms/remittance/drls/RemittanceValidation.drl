@@ -3,6 +3,7 @@ package com.pdd.yo2.brms.remittance.drls;
 import com.pdd.yo2.brms.domain.entity.Remittance;
 import com.pdd.yo2.brms.sharedkernel.constant.TransactionType;
 import com.pdd.yo2.brms.sharedkernel.constant.TransactionStatus;
+import java.math.BigDecimal;
 
 rule "Restricted for Iran"
     dialect "java"
@@ -14,5 +15,18 @@ rule "Restricted for Iran"
         modify($remittanceObj) {
             setTransactionStatus(TransactionStatus.REJECTED),
             setStatusMessage("All remittance transactions either from or to Iran is restricted.")
+        }
+end
+
+rule "Maximum remittance amount of 3000 QAR for Qatar"
+    dialect "java"
+    when
+        $remittanceObj: Remittance(transactionStatus != TransactionStatus.REJECTED && merchantCountry == "Qatar")
+    then
+        System.out.printf("Transaction with ID %s is REJECTED for Qatar. Transfer amount cannot surpass maximum value of 3000 QAR!\n",
+            $remittanceObj.getTransactionId());
+        modify($remittanceObj) {
+            setTransactionStatus(TransactionStatus.REJECTED),
+            setStatusMessage("Cannot surpass the maximum amount of 100,000 USD for Qatar!")
         }
 end
