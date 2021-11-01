@@ -3,11 +3,11 @@ package com.pdd.yo2.brms.domain.usecase.aggregate;
 import com.pdd.yo2.brms.domain.entity.Remittance;
 import com.pdd.yo2.brms.domain.usecase.dto.input.RemittanceRequest;
 import com.pdd.yo2.brms.domain.usecase.dto.output.RemittanceResponse;
-import com.pdd.yo2.brms.port.input.RemittanceService;
+import com.pdd.yo2.brms.port.input.RemittanceBusinessService;
 import com.pdd.yo2.brms.port.output.RemittanceRuleMediatorRepository;
 import com.pdd.yo2.brms.sharedkernel.exception.RemittanceException;
 
-public class RemittanceMediator implements RemittanceService {
+public class RemittanceMediator implements RemittanceBusinessService {
 
     private final RemittanceRuleMediatorRepository repository;
 
