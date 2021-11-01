@@ -30,7 +30,7 @@ public class RemittanceBusinessRuleTest {
                 .withCustomerName("Yauri")
                 .withOrigin("ID")
                 .withBeneficiaryId("555")
-                .withBeneficiaryName("Mashaek")
+                .withBeneficiaryName("Naruto")
                 .withBeneficiaryCountry("IR")
                 .build();
         drools.insertAndFire(remittance);
@@ -44,7 +44,7 @@ public class RemittanceBusinessRuleTest {
                 .withId(UUID.randomUUID().toString())
                 .withAmount(BigDecimal.valueOf(100))
                 .withCustomerId("555")
-                .withCustomerName("Mashaek")
+                .withCustomerName("Naruto")
                 .withOrigin("IR")
                 .withBeneficiaryId("123")
                 .withBeneficiaryName("Yauri")
