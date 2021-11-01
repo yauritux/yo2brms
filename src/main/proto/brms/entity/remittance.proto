@@ -3,7 +3,7 @@ syntax = "proto3";
 package brms.entity;
 
 option java_multiple_files = true;
-option java_package = "com.pdd.brms.infrastructure.api.grpc.dto";
+option java_package = "com.pdd.yo2.brms.infrastructure.api.grpc.dto";
 
 message RemittanceRequest {
   string transaction_id = 1;
