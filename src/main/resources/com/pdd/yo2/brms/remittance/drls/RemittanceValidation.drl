@@ -1,0 +1,18 @@
+package com.pdd.yo2.brms.remittance.drls;
+
+import com.pdd.yo2.brms.domain.entity.Remittance;
+import com.pdd.yo2.brms.sharedkernel.constant.TransactionType;
+import com.pdd.yo2.brms.sharedkernel.constant.TransactionStatus;
+
+rule "Restricted for Iran"
+    dialect "java"
+    when
+        $remittanceObj: Remittance(transactionStatus != TransactionStatus.REJECTED && (beneficiaryCountry == "IR" || countryOfOrigin == "IR"))
+    then
+        System.out.printf("Transaction with ID %s is REJECTED!!. Reason = All remittance transactions from and/or to Iran is restricted.\n",
+            $remittanceObj.getTransactionId());
+        modify($remittanceObj) {
+            setTransactionStatus(TransactionStatus.REJECTED),
+            setStatusMessage("All remittance transactions either from or to Iran is restricted.")
+        }
+end
