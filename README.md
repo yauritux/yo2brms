@@ -9,4 +9,4 @@ YO2 rule engine that uses business rules during the actions.
 
 ## Code Architecture
 
-![Yo2BRMS Code Architecture](https://dev.azure.com/luluorg/_git/yo2-brms?path=/yo2brms.png)
+![Yo2BRMS Code Architecture](/.attachments/yo2brms.png)
